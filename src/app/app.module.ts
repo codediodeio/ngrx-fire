@@ -3,13 +3,25 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
 
-import { StoreModule, MetaReducer } from '@ngrx/store';
-import { postReducer } from './reducers/post.reducer';
+import { environment }               from '../environments/environment';
+export const firebaseConfig = environment.firebaseConfig;
 
-import { simpleReducer } from './simple.reducer';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+
+
+
+import { AngularFireModule }         from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+
+import { EffectsModule }             from '@ngrx/effects';
+import { StoreModule }               from '@ngrx/store';
+import { StoreDevtoolsModule }       from '@ngrx/store-devtools';
+
+import { PostEffects }               from './effects/post.effects';
+import { postReducer }               from './reducers/post.reducer';
+
 
 @NgModule({
   declarations: [
@@ -18,13 +30,17 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
+
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    
+    EffectsModule.forRoot([PostEffects]),
+
     StoreModule.forRoot({
       post: postReducer
     }),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25 //  Retains last 25 states
-    })
+
+    StoreDevtoolsModule.instrument({ maxAge: 25 })
   ],
   providers: [],
   bootstrap: [AppComponent]

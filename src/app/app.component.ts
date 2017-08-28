@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
 
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
+import { Store }        from '@ngrx/store';
+import { Observable }   from 'rxjs/Observable';
 
-import { Post } from './reducers/post.reducer';
-import * as PostActions from './actions/post.actions';
-
+import { Post }         from './models/post.model';
+import * as postActions from './actions/post.actions';
 
 interface AppState {
   post: Post;
-  message: string;
 }
 
 @Component({
@@ -19,36 +17,19 @@ interface AppState {
 })
 export class AppComponent {
 
-  post: Observable<Post>
-  text: string;
-  message$: Observable<string>
+  post$: Observable<Post>;
 
   constructor(private store: Store<AppState>) {
-    this.post = this.store.select('post')
-    this.message$ = this.store.select('message')
+    this.post$ = this.store.select('post');
   }
 
-  spanishMessage() {
-    this.store.dispatch({type: 'SPANISH'})
+  getPost() {
+    this.store.dispatch(new postActions.GetPost('/posts/testPost'));
   }
 
-  frenchMessage() {
-    this.store.dispatch({type: 'FRENCH'})
+  vote(post: Post, val: number) {
+    this.store.dispatch(new postActions.VoteUpdate({ post, val }));
   }
 
-  editText() {
-    this.store.dispatch(new PostActions.EditText(this.text) )
-  }
 
-  resetPost() {
-    this.store.dispatch(new PostActions.Reset())
-  }
-
-  upvote() {
-    this.store.dispatch(new PostActions.Upvote())
-  }
-
-  downvote() {
-    this.store.dispatch(new PostActions.Downvote())
-  }
 }

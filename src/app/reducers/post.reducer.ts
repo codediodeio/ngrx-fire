@@ -1,40 +1,37 @@
 import * as PostActions from '../actions/post.actions';
-import { Post } from '../models/post.model'
+import { Post } from '../models/post.model';
 
 export type Action = PostActions.All;
 
 
-/// Default app state
-const defaultState: Post = {
-  text: 'Hello. I am the default post',
-  likes: 0
-}
-
-/// Helper function to create new state objcet
-const newState = (state, newData) => {
-  return Object.assign({}, state, newData)
-}
+/// Converts state objects to new state with ... spread operator
+const newState = (...stateObjects) => {
+  return Object.assign({}, ...stateObjects);
+};
 
 
 /// Reducer function
-export function postReducer(state: Post = defaultState, action: Action) {
-  console.log(action.type, state)
+export function postReducer(state: Post, action: Action) {
 
-	switch (action.type) {
-		case PostActions.EDIT_TEXT:
-			return newState(state, { text: action.payload });
+  switch (action.type) {
 
-    case PostActions.UPVOTE:
-      return newState(state, { likes: state.likes + 1 });
+    case PostActions.GET_POST:
+      return newState(state, { loading: true });
 
-		case PostActions.DOWNVOTE:
-			return newState(state, { likes: state.likes - 1 });
+    case PostActions.GET_POST_SUCCESS:
+      return newState(state, action.payload, { loading: false } );
 
-		case PostActions.RESET:
-			return defaultState;
+    case PostActions.VOTE_UPDATE:
+      return newState(state, action.payload, { loading: true } );
 
-		default:
-			return state;
+    case PostActions.VOTE_SUCCESS:
+      return newState(state, { loading: false });
 
-	}
+    case PostActions.VOTE_FAIL:
+      return newState(state, action.payload, { loading: false });
+
+    default:
+      return state;
+
+  }
 }

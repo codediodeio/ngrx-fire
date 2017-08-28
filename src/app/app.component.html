@@ -1,50 +1,36 @@
 <div class="columns">
-  <div class="column is-half is-offset-one-quarter" style="text-align: center; margin-top: 100px;">
+  <div class="column is-half is-offset-one-quarter" style="text-align: center; margin-top: 50px;">
 
 
-<h1>ngrxFire</h1>
+    <h1>ngrxFire</h1>
 
-<img src="/assets/ngrx-firebase.png" alt="demo app with ngrx and firebase" width="200px" >
+      <img src="/assets/ngrx-firebase.png" alt="demo app with ngrx and firebase" width="200px" >
 
-<hr>
+      <hr>
 
-
-<div *ngIf="post | async as p">
-
-
-  <h2>{{ (post | async)?.text }}</h2>
-  <h4>Votes: <span class="tag is-info is-large">{{ p.likes }}</span></h4>
-
-  <hr>
-
-  <button (click)="upvote()" class="button is-success">Upvote</button>
-  <button (click)="downvote()" class="button is-danger">Downvote</button>
-  <button (click)="resetPost()" class="button is-warning">Reset</button>
-  <hr>
-  <input type="text" class="input" [(ngModel)]="text" [value]="text">
-  <button (click)="editText()" class="button is-primary">Change Title</button>
-
-</div>
+      <div *ngIf="post$ | async as post">
 
 
+        <i *ngIf="post.loading" class="fa fa-spin fa-refresh"></i>
+
+          <h2>{{ post.text }}</h2>
+          <h4>Votes: <span class="tag is-info is-large">{{ post.votes }}</span></h4>
+
+          <hr>
 
 
+          <button (click)="vote(post, 1)" class="button is-success">Upvote</button>
+          <button (click)="vote(post, -1)" class="button is-danger">Downvote</button>
 
-<!-- <h2>Simple Reducer</h2>
-
-
-
-<hr>
-
-<h2>{{ message$ | async }}</h2>
-
-<hr>
-
-<button (click)="spanishMessage()" class="button is-success">Spanish</button>
-<button (click)="frenchMessage()" class="button is-info">French</button> -->
+          <hr>
+        
+    </div>
 
 
-</div>
+    <button (click)="getPost()" class="button is-info">Load Post from Firebase</button>
+
+
+  </div>
 </div>
 
 
