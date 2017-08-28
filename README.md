@@ -4,12 +4,12 @@ NgrxFire is a redux demo app created with Angular ngrx and Firebase.
 
 ## Build your Angular ngrx on a Solid Foundation
 
-Learn Angular redux basics by building this app step-by-step.
+Learn Angular ngrx Redux basics by building this app step-by-step.
 
 - [Lessons and Screencasts](https://angularfirebase.com)
 - [Join the Slack Team](https://join.slack.com/angularfirebase/shared_invite/MjA2NTgxMTI0MTk2LTE0OTg4NTQ4MDAtMjhhZDIzMjc0Mg)
 
-![](/src/assets/ngrx-fire-demo.gif)
+![](https://firebasestorage.googleapis.com/v0/b/firestarter-96e46.appspot.com/o/assets%2Fngrx-fire-demo.gif?alt=media&token=9e989b08-61d9-489e-87cd-5fe376fe97f8)
 
 ## Usage
 
