@@ -3,13 +3,6 @@ import { Post } from '../models/post.model';
 
 export type Action = PostActions.All;
 
-
-/// Converts state objects to new state with ... spread operator
-// const newState = (...stateObjects) => {
-//   return Object.assign({}, ...stateObjects);
-// };
-
-
 /// Reducer function
 export function postReducer(state: Post, action: Action) {
 

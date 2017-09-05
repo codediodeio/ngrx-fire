@@ -8,6 +8,32 @@
 
       <hr>
 
+
+      <div *ngIf="user$ | async as user">
+          
+        
+      
+        <h1>Howdy, {{ user.displayName }}</h1>
+        <h4>{{ user.uid }}</h4>
+
+        <button class="button is-danger" 
+                *ngIf="!user.uid"
+                (click)="googleLogin()" 
+                [class.is-loading]="user.loading">
+
+            <span class="icon">
+              <i class="fa fa-google"></i>
+            </span>
+            <span>Sign In with Google</span>
+        </button>
+      
+        <!-- <button (click)="googleLogin()" *ngIf="!user.uid" class="button is-danger">Sign In with Google</button> -->
+        <button (click)="logout()"      *ngIf="user.uid"  class="button is-warn">Logout</button>
+      </div>
+
+
+      <hr>
+
       <div *ngIf="post$ | async as post">
 
 
@@ -21,18 +47,20 @@
 
           <button (click)="vote(post, 1)" class="button is-success">Upvote</button>
           <button (click)="vote(post, -1)" class="button is-danger">Downvote</button>
-
-          <hr>
         
     </div>
 
 
     <button (click)="getPost()" class="button is-info">Load Post from Firebase</button>
 
+    <hr>
+
+
+
+
 
   </div>
 </div>
-
 
 
 
