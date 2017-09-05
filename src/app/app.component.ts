@@ -36,7 +36,6 @@ export class AppComponent implements OnInit {
   }
 
   googleLogin() {
-    console.log('sup')
     this.store.dispatch(new userActions.GoogleLogin());
   }
 
