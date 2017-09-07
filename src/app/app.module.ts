@@ -6,7 +6,7 @@ import { BrowserModule }             from '@angular/platform-browser';
 // *************************
 
 import { AppRoutingModule }          from './app-routing.module';
-import { AppStateModule }           from './state/state.module';
+import { AppStateModule }            from './state/state.module';
 
 import { AppComponent }              from './views/app.component';
 

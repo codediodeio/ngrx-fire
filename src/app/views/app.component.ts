@@ -1,55 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { Store }        from '@ngrx/store';
 import { Observable }   from 'rxjs/Observable';
 
-import { Post }         from '../state/posts/post.model';
-import * as postActions from '../state/posts/post.actions';
+import {Post} from '../state/posts';
+import {User} from '../state/users';
 
-import { User }         from '../state/users/user.model';
-import * as userActions from '../state/users/user.actions';
+import {UserFacade} from '../state/users/user.facade';
+import {PostsFacade} from '../state/posts/post.facade';
 
-interface AppState {
-  post: Post;
-  user: User;
-}
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
-  post$: Observable<Post>;
-  user$: Observable<User>;
+  post$: Observable<Post> = this.postService.post$;
+  user$: Observable<User> = this.userService.user$;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private userService:UserFacade, private postService:PostsFacade) { }
 
-  }
-
-  ngOnInit() {
-    this.post$ = this.store.select('post');
-    this.user$ = this.store.select('user');
-
-    this.store.dispatch(new userActions.GetUser());
-  }
-
-  googleLogin() {
-    this.store.dispatch(new userActions.GoogleLogin());
-  }
-
-  logout() {
-    this.store.dispatch(new userActions.Logout());
-  }
-
-  getPost() {
-    this.store.dispatch(new postActions.GetPost('/posts/testPost'));
-  }
+  login()         {  this.userService.login();      }
+  logout()        {  this.userService.logout();     }
 
   vote(post: Post, val: number) {
-    this.store.dispatch(new postActions.VoteUpdate({ post, val }));
+    this.postService.vote(post, val);
   }
-
-
 }

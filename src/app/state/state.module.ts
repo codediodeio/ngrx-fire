@@ -12,11 +12,11 @@ import { StoreDevtoolsModule }       from '@ngrx/store-devtools';
 // Custom Application imports
 // *************************
 
-import { PostEffects }               from './posts/post.effects';
 import { postReducer }               from './posts/post.reducer';
-
-import { UserEffects }               from './users/user.effects';
 import { userReducer }               from './users/user.reducer';
+
+import {UserFacade}                  from './users';
+import {PostsFacade}                 from './posts';
 
 import { environment }               from '../../environments/environment';
 export const firebaseConfig = environment.firebaseConfig;
@@ -28,10 +28,11 @@ export const firebaseConfig = environment.firebaseConfig;
     AngularFireAuthModule,
 
     EffectsModule.forRoot([
-      PostEffects,
-      UserEffects
+      UserFacade,
+      PostsFacade
     ]),
 
+    // Signature matches AppState interface
     StoreModule.forRoot({
       post: postReducer,
       user: userReducer
@@ -39,6 +40,9 @@ export const firebaseConfig = environment.firebaseConfig;
 
     StoreDevtoolsModule.instrument({ maxAge: 25 })
   ],
-  providers: [],
+  providers: [
+      UserFacade,
+      PostsFacade
+  ],
 })
 export class AppStateModule { }
