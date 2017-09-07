@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { Store }        from '@ngrx/store';
 import { Observable }   from 'rxjs/Observable';
 
-import { Post }         from './models/post.model';
-import * as postActions from './actions/post.actions';
+import { Post }         from '../state/posts/post.model';
+import * as postActions from '../state/posts/post.actions';
 
-import { User }         from './models/user.model';
-import * as userActions from './actions/user.actions';
+import { User }         from '../state/users/user.model';
+import * as userActions from '../state/users/user.actions';
 
 interface AppState {
   post: Post;

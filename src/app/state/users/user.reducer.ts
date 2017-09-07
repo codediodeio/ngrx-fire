@@ -1,5 +1,5 @@
-import * as userActions from '../actions/user.actions';
-import { User } from '../models/user.model';
+import * as userActions from './user.actions';
+import { User } from './user.model';
 
 export type Action = userActions.All;
 

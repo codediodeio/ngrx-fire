@@ -1,22 +1,17 @@
 import { Injectable }                 from '@angular/core';
 import { Effect, Actions }            from '@ngrx/effects';
-import { User }                       from '../models/user.model';
+import { User }                       from './user.model';
 
 import { AngularFireAuth }            from 'angularfire2/auth';
 import * as firebase                  from 'firebase';
 
 import { Observable }                 from 'rxjs/Observable';
-import 'rxjs/add/observable/fromPromise';
-import 'rxjs/add/observable/of';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/delay';
+import '../../utils/rxjs.operators';
 
 
-import * as userActions from '../actions/user.actions';
-export type Action = userActions.All;
+import * as userActions from './user.actions';
+type Action = userActions.All;
 
 
 @Injectable()
