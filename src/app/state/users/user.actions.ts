@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { User } from '../models/user.model';
+import { User } from './user.model';
 
 export const GET_USER               = '[Auth] Get user';
 export const AUTHENTICATED          = '[Auth] Authenticated';

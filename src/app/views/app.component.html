@@ -18,7 +18,7 @@
 
         <button class="button is-danger" 
                 *ngIf="!user.uid"
-                (click)="googleLogin()" 
+                (click)="login()"
                 [class.is-loading]="user.loading">
 
             <span class="icon">
@@ -51,7 +51,7 @@
     </div>
 
 
-    <button (click)="getPost()" class="button is-info">Load Post from Firebase</button>
+    <button *ngIf="!(post$ | async) as post" (click)="loadPost()" class="button is-info">Load Post from Firebase</button>
 
     <hr>
 

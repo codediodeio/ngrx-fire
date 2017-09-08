@@ -1,9 +1,19 @@
-import * as userActions from '../actions/user.actions';
-import { User } from '../models/user.model';
+import { AppState } from '../state';
+
+import * as userActions from './user.actions';
+import { User } from './user.model';
 
 export type Action = userActions.All;
 
 const defaultUser = new User(null, 'GUEST');
+
+/**
+ * Define all store queries for Post(s)
+ */
+export namespace UsersQuery {
+  export const getUser = (state: AppState) => state.user;
+}
+
 
 /// Reducer function
 export function userReducer(state: User = defaultUser, action: Action) {

@@ -1,7 +1,17 @@
-import * as PostActions from '../actions/post.actions';
-import { Post } from '../models/post.model';
+import { AppState } from '../state';
+
+import * as PostActions from './post.actions';
+import { Post } from './post.model';
 
 export type Action = PostActions.All;
+
+/**
+ * Define all store queries for Post(s)
+ */
+export namespace PostsQuery {
+  export const getPost = (state: AppState) => state.post;
+}
+
 
 /// Reducer function
 export function postReducer(state: Post, action: Action) {
