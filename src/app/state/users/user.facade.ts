@@ -76,11 +76,11 @@ export class UserFacade {
                  })
                  .catch(err => Observable.of(new userActions.AuthError({error: err.message})) );
 
+
       @Effect({dispatch: false})
       init$: Observable<any> = defer(() => {
-        this.store.dispatch(new userActions.GoogleLogin());
+        this.store.dispatch(new userActions.GetUser());
       });
-
 
   // ************************************************
   // Internal Code
